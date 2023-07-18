@@ -24,7 +24,6 @@ test_transaction-*.tar
 
 # Temporary files for e.g. tests or build
 /tmp
-/Dockerfile
 
 # Mix files
 /.mix
