@@ -14,7 +14,8 @@ config :tester, :flows, %{
       password: "password"
     },
     payment_api: %{
-      base_url: "https://api.vality.dev/v2"
+      base_url: "https://api.vality.dev/v2",
+      origin: "https://dashboard.vality.dev"
     },
     flow: Tester.Flow.Payment,
     options: %{

@@ -1,7 +1,6 @@
 defmodule Tester.Api.Client do
   use Tesla
 
-  plug(Tesla.Middleware.Headers, "User-Agent": "Tester")
   plug(Tester.Api.Middleware.Auth)
   plug(Tester.Api.Middleware.RequestId)
   plug(Tester.Api.Middleware.Deadline)
@@ -10,13 +9,15 @@ defmodule Tester.Api.Client do
 
   @type t() :: Tesla.Env.client()
   @type options() :: %{
-          :base_url => String.t()
+          :base_url => String.t(),
+          :origin => String.t()
         }
 
   @spec new(options()) :: t
   def new(options) do
     middleware = [
-      {Tesla.Middleware.BaseUrl, options[:base_url]}
+      {Tesla.Middleware.BaseUrl, options[:base_url]},
+      {Tesla.Middleware.Headers, [{"User-agent", "Tester"},{"Origin", options[:origin]}]}
     ]
 
     adapter = {Tesla.Adapter.Gun, []}
